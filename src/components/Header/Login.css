@@ -1,0 +1,43 @@
+.login-h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 60px auto;
+}
+
+.login-form {
+    width: 100%;
+    margin: 10% auto;
+}
+
+.login-input {
+    width: 80%;
+    height: 60px;
+    padding: 0px;
+    margin: 10px auto;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(222, 222, 222);
+    border-radius: 5px;
+    text-indent: 5%;
+    font-size: 16px;
+}
+
+.login-button {
+    width: 80%;
+    height: 60px;
+    margin: 70px auto;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.login-button:hover {
+    background-color: #0088ff;
+    border: 2px;
+    color: white; 
+}

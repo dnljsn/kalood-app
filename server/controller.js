@@ -2,13 +2,13 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
     async signup(req, res) {
-        let { email, password } = req.body;
+        let { user, password } = req.body;
         let db = req.app.get('db')
-        let foundUser = await db.find_user([email]);
+        let foundUser = await db.find_user([user]);
         if (foundUser[0]) return res.status(200).send({ message: 'Email already in use' })
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(password, salt);
-        let [createdUser] = await db.create_user([email, hash]);
+        let [createdUser] = await db.create_user([user, hash]);
         req.session.user = { email: createdUser.user_email };
         res.status(200).send(req.session.user)
     },
@@ -32,5 +32,12 @@ module.exports = {
     logout(req, res) {
         req.session.destroy();
         res.status(200).send('')
+    },
+    sessionCheck(req, res) {
+        if (req.session.user) {
+            return res.status(200).send(req.session.user)
+        } else {
+            res.status(401).send('No active session')
+        }
     }
 }

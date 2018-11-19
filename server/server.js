@@ -3,6 +3,7 @@ const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 const controller = require('./controller');
+// const socket = require('socket.io');
 
 
 const app = express();
@@ -26,6 +27,21 @@ app.use(session({
 app.post('/auth/signup', controller.signup)
 app.post('/auth/login', controller.login)
 app.get('/auth/logout', controller.logout)
+app.get('/auth/check', controller.sessionCheck)
 
 app.listen(SERVER_PORT, () =>
-console.log(`Ahoy, port ${SERVER_PORT}!`))
+    console.log(`Ahoy, port ${SERVER_PORT}!`))
+
+// const io = socket(app.listen(SERVER_PORT, () =>
+//     console.log(`Ahoy, port ${SERVER_PORT}!`))
+// )
+
+// io.on('connection', socket => {
+//     console.log("A user has connected with my socket")
+
+//     socket.io('semi-message', message => {
+//         console.log(message);
+//         io.emit('message-to-users', {message: message.message})
+//     })
+// })
+

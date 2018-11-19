@@ -1,0 +1,33 @@
+.account-nav {
+    padding-inline-start: 0px;
+}
+
+.account-button-1 {
+    margin: 20px;
+    border-style: none;
+    border-bottom: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.account-button-2 {
+    margin: 20px;
+    border-style: none;
+    border-bottom: 3px;
+    /* border-bottom-style: solid; */
+    /* border-bottom-color: black; */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.account-buttons:hover {
+    color: #0088ff; 
+}
+
+.account-pic {
+    
+}
