@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/reducer';
 import { modalState } from '../../redux/reducer';
-import "./Login.css";
+import "./Header.css";
 
 const emptyField = 'Please enter email and password.'
 
@@ -56,6 +56,7 @@ class Login extends Component {
         return (
             <div>
                 <h1 className='login-h1'>Welcome back!</h1>
+                <h2 className='login-h2'>LOG IN</h2>
                 <form className='login-form'>
                     <input
                         className="login-input"

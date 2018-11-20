@@ -3,15 +3,14 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/reducer';
 import { modalState } from '../../redux/reducer';
-import './Signup.css'
-// import './Auth.css';
+import './Header.css';
 
 const emptyField = 'Please enter email and password.'
 
 class Signup extends Component {
 
     state = {
-        user: '',
+        email: '',
         password: ''
     }
 
@@ -20,7 +19,7 @@ class Signup extends Component {
     }
 
     updateEmail(e) {
-        this.setState({ user: e.target.value })
+        this.setState({ email: e.target.value })
     }
 
     updatePassword(e) {
@@ -28,25 +27,19 @@ class Signup extends Component {
     }
 
     async signup() {
-        if (!this.state.user || !this.state.password) return alert(emptyField)
+        if (!this.state.email || !this.state.password) return alert(emptyField)
         let res = await axios.post('/auth/signup', {
             user: this.state.user,
             password: this.state.password
         }).catch(err => { alert(err.response.request.response) })
-        if (res.data.user) {
-            this.props.loginUser(res.data.user)
+        if (res.data.email) {
+            this.props.loginUser(res.data)
             this.props.modalState(false)
+            this.setState({
+                userInput: ""
+            })
         }
     }
-
-    // handleKeyPress(e) {
-    //     if (e === 'Enter') {
-    //         this.props.buttonClick(this.state.userInput)
-    //         this.setState({
-    //             userInput: ""
-    //         })
-    //     }
-    // }
 
     handleKeyPress(e) {
         if (e === 'Enter') {
@@ -62,6 +55,7 @@ class Signup extends Component {
         return (
             <div>
                 <h1 className='signup-h1'>Welcome to Kalood!</h1>
+                <h2 className='signup-h2'>SIGN UP</h2>
                 <form className='signup-form'>
                     <input
                         className='signup-input'

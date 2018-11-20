@@ -1,8 +1,32 @@
-.account-nav {
-    padding-inline-start: 0px;
+.account-ul {
+    list-style: none;
+    text-align: center;
+    margin: 20;
+    padding: 0;
 }
 
-.account-button-1 {
+.account-li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.account-div {
+    display: inline;
+
+}
+
+.account-button {
+    margin: 20px;
+    border-style: none;
+    border-bottom: 3px;
+    border-bottom-style: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.account-button-active {
     margin: 20px;
     border-style: none;
     border-bottom: 3px;
@@ -13,21 +37,80 @@
     font-size: 14px;
 }
 
-.account-button-2 {
-    margin: 20px;
-    border-style: none;
-    border-bottom: 3px;
-    /* border-bottom-style: solid; */
-    /* border-bottom-color: black; */
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-}
 
-.account-buttons:hover {
+.account-button:hover {
     color: #0088ff; 
 }
 
-.account-pic {
-    
+.account-form {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.profile-input {
+    width: 80%;
+    height: 60px;
+    padding: 0px;
+    margin: 10px auto;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(222, 222, 222);
+    border-radius: 5px;
+    text-indent: 5%;
+    font-size: 16px;
+}
+
+.settings-input {
+    width: 80%;
+    height: 60px;
+    padding: 0px;
+    margin: 10px auto;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(222, 222, 222);
+    border-radius: 5px;
+    text-indent: 5%;
+    font-size: 16px;
+}
+
+.button-holder {
+    text-align: center;
+}
+
+.button-style {
+    width: 80%;
+    height: 60px;
+    margin: 20px auto;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.button-style:hover {
+    background-color: #0088ff;
+    border: 2px;
+    color: white; 
+}
+
+.button-style-delete {
+    width: 80%;
+    height: 60px;
+    margin: 20px auto;
+    border: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    color: #ff0000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.button-style-delete:hover {
+    background-color: #ff0000;
+    border: 2px;
+    color: white; 
 }

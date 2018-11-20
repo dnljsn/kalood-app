@@ -2,13 +2,13 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
     async signup(req, res) {
-        let { user, password } = req.body;
+        let { email, password } = req.body;
         let db = req.app.get('db')
-        let foundUser = await db.find_user([user]);
+        let foundUser = await db.find_user([email]);
         if (foundUser[0]) return res.status(200).send({ message: 'Email already in use' })
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(password, salt);
-        let [createdUser] = await db.create_user([user, hash]);
+        let [createdUser] = await db.create_user([email, hash]);
         req.session.user = { email: createdUser.user_email };
         res.status(200).send(req.session.user)
     },

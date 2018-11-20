@@ -6,28 +6,30 @@ export default class Profile extends Component {
     render() {
         return (
             <div>
-                <img className='account-pic' src={ProfilePic} alt="" style={{ borderRadius: '50%', width: '200px' }} />
-                <form className='account-profile-form'>
-                    <input
-                        className="account-profile-input"
-                        onChange={(e) => this.updateEmail(e)}
-                        type="text"
-                        placeholder="Email"
-                        ref={(input) => { this.firstInput = input; }}
-                    />
-                    <input
-                        className="login-input"
-                        onChange={(e) => this.updatePassword(e)}
-                        type="text"
-                        placeholder="Password"
-                        onKeyPress={(e) => this.handleKeyPress(e.key)}
-                    />
-                    <button
-                        className='login-button'
-                        onClick={() => this.login()}
-                        type='button'>LOG IN
-                    </button>
-                </form>
+                <img className='profile-pic' src={ProfilePic} alt="" style={{ borderRadius: '50%', width: '200px' }} />
+                    <form className='account-form'>
+                        <input
+                            className="profile-input"
+                            onChange={(e) => this.updateEmail(e)}
+                            type="text"
+                            placeholder="First Name"
+                            ref={(input) => { this.firstInput = input; }}
+                        />
+                        <input
+                            className="profile-input"
+                            onChange={(e) => this.updatePassword(e)}
+                            type="text"
+                            placeholder="Last Name"
+                            onKeyPress={(e) => this.handleKeyPress(e.key)}
+                        />
+                        <div className='button-holder'>
+                            <button
+                                className='button-style'
+                                onClick={() => this.login()}
+                                type='button'
+                            >UPDATE</button>
+                        </div>
+                    </form>
             </div>
         )
     }

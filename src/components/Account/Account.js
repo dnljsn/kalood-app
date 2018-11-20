@@ -1,29 +1,23 @@
 import React, { Component } from 'react'
-import './Account.css';
 import Profile from './Profile';
 import Settings from './Settings';
+import './Account.css';
 
 export default class Account extends Component {
 
-    constructor() {
-        super();
-
-        this.state = {
-            toggleView: true
-        }
-        this.profile = this.profile.bind(this);
-        this.settings = this.settings.bind(this);
+    state = {
+        settingsView: false
     }
 
     profile() {
         this.setState({
-            toggleView: true
+            settingsView: false
         })
     }
 
     settings() {
         this.setState({
-            toggleView: false
+            settingsView: true
         })
     }
 
@@ -31,23 +25,43 @@ export default class Account extends Component {
         return (
             <div>
                 <nav>
-                    <ul className='account-nav' >
-                        <li>
-                            <button
-                                className='account-button-1'
-                                onClick={() =>  this.profile() }
-                            >PROFILE</button>
+                    <ul className='account-ul'>
+                        <li className='account-li' >
+                            <div className='account-div'>
+                                {this.state.settingsView ? (
+                                    <button
+                                        className='account-button'
+                                        onClick={() => this.profile()}
+                                    >PROFILE</button>
+                                ) : (
+                                        <button
+                                            className='account-button-active'
+                                            onClick={() => this.profile()}
+                                        >PROFILE</button>
+                                    )
+                                }
+                            </div>
                         </li>
-                        <li>
-                            <button
-                                className='account-button-2'
-                                onClick={() => this.settings() }
-                            >SETTINGS</button>
+                        <li className='account-li'>
+                            <div className='account-div'>
+                                {this.state.settingsView ? (
+                                    <button
+                                        className='account-button-active'
+                                        onClick={() => this.settings()}
+                                    >SETTINGS</button>
+                                ) : (
+                                        <button
+                                            className='account-button'
+                                            onClick={() => this.settings()}
+                                        >SETTINGS</button>
+                                    )
+                                }
+                            </div>
                         </li>
                     </ul>
                 </nav>
-                {this.toggleView ? <Profile /> : <Settings />}
+                    {this.state.settingsView ? <Settings /> : <Profile />}
             </div>
-        )
-    }
+                )
+            }
 }
