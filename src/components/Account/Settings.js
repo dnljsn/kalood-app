@@ -1,33 +1,66 @@
 import React, { Component } from 'react'
 import './Account.css';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { updateUserEmail } from '../../redux/reducer';
 
-export default class Settings extends Component {
+
+class Settings extends Component {
+
+    state = {
+        emailInput: ''
+    }
+
+    componentDidMount() {
+        this.setState({
+            emailInput: this.props.user.email
+        })
+    }
+
+    async updateEmail() {
+        let res = await axios.patch('/api/user-email', {
+            newEmail: this.state.emailInput
+        })
+            .catch(err => { alert(err.response.request.response) })
+        this.props.updateUserEmail(res.data)
+    }
+
+    updateEmailInput(e) {
+        this.setState({ emailInput: e.target.value })
+    }
+
+    handleKeyPress(e) {
+        if (e === 'Enter') {
+            this.updateEmail()
+        }
+    }
+
     render() {
         return (
             <div>
-                <p>Current User's Email</p>
                 <form className='account-form'>
                     <input
                         className="settings-input"
-                        onChange={(e) => this.updateEmail(e)}
+                        onChange={(e) => this.updateEmailInput(e)}
                         type="text"
                         placeholder="Email"
-                        ref={(input) => { this.firstInput = input; }}
+                        onKeyPress={(e) => this.handleKeyPress(e.key)}
+                        value={this.state.emailInput || ""}
                     />
                     <div className='.button-holder'>
                         <button
                             className='button-style'
-                            onClick={() => this.login()}
+                            onClick={() => this.updateEmail()}
                             type='button'
                         >UPDATE EMAIL</button>
                         <button
                             className='button-style'
-                            onClick={() => this.login()}
+                            // onClick={() => this.login()}
                             type='button'
                         >RESET PASSWORD</button>
                         <button
                             className='button-style-delete'
-                            onClick={() => this.login()}
+                            // onClick={() => this.login()}
                             type='button'
                         >DELETE ACCOUNT</button>
                     </div>
@@ -36,3 +69,15 @@ export default class Settings extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+let mapDispatchToProps = {
+    updateUserEmail
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

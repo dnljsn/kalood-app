@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loginUser } from '../../redux/reducer';
+import { userAuth } from '../../redux/reducer';
 import { modalState } from '../../redux/reducer';
 import './Header.css';
 
@@ -27,27 +27,27 @@ class Signup extends Component {
     }
 
     async signup() {
-        if (!this.state.email || !this.state.password) return alert(emptyField)
-        let res = await axios.post('/auth/signup', {
-            user: this.state.user,
-            password: this.state.password
-        }).catch(err => { alert(err.response.request.response) })
-        if (res.data.email) {
-            this.props.loginUser(res.data)
+        try {
+            if (!this.state.email || !this.state.password) return alert(emptyField)
+            let res = await axios.post('/auth/signup', {
+                email: this.state.email,
+                password: this.state.password
+            })
+            this.props.userAuth(res.data)
             this.props.modalState(false)
             this.setState({
-                userInput: ""
+                email: '',
+                password: ''
             })
+        }
+        catch (error) {
+            alert(error.response.request.response)
         }
     }
 
     handleKeyPress(e) {
         if (e === 'Enter') {
             this.signup()
-            this.setState({
-                user: '',
-                password: ''
-            })
         }
     }
 
@@ -89,7 +89,7 @@ function mapStateToProps(state) {
 }
 
 let mapDispatchToProps = {
-    modalState, loginUser
+    modalState, userAuth
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

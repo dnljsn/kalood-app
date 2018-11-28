@@ -3,10 +3,10 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { logoutUser } from '../../redux/reducer';
+// import { logoutUser } from '../../redux/reducer';
 import { modalState } from '../../redux/reducer';
-import { loginUser } from '../../redux/reducer';
-import { sessionCheck } from '../../redux/reducer'
+import { userAuth } from '../../redux/reducer';
+// import { sessionState } from '../../redux/reducer'
 import Logo from '../../assets/kalood-logo.svg';
 import './Header.css';
 import Login from './Login';
@@ -31,19 +31,15 @@ class Header extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props.user)
         try {
-            if (!this.props.user.email) {
+            if (!this.props.session) {
                 let res = await axios.get('/auth/check');
-                this.props.loginUser(res.data)
-                console.log(res.data)
+                this.props.userAuth(res.data)
             }
         } catch (error) {
-            console.log(error, "No active session")
-            this.props.loginUser({})
-            console.log(this.props.user)
+            // this.props.userAuth({})
         }
-        this.props.sessionCheck()
+        // this.props.sessionState(true)
     }
 
     openModal(component) {
@@ -59,7 +55,7 @@ class Header extends Component {
 
     async logout() {
         let res = await axios.get('/auth/logout')
-        this.props.logoutUser(res.data)
+        this.props.userAuth(res.data);
     }
 
 
@@ -71,12 +67,12 @@ class Header extends Component {
                     <Link to="/">
                         <img className='logo' src={Logo} alt="" />
                     </Link>
-                    {this.props.user.email ? (
+                    {this.props.session ? (
                         <button className='header-button' onClick={this.logout}>LOGOUT</button>
                     ) : (
                             <button className='header-button' onClick={() => this.openModal('Login')}>LOG IN</button>
                         )}
-                    {this.props.user.email ? (
+                    {this.props.session ? (
                         <Link to="/account">
                             <button className='header-button'>ACCOUNT</button>
                         </Link>
@@ -84,7 +80,7 @@ class Header extends Component {
                             <button className='header-button' onClick={() => this.openModal('Signup')}>SIGN UP</button>
                         )}
                     <Modal
-                        isOpen={this.props.modalIsOpen}
+                        isOpen={this.props.modal}
                         onRequestClose={this.closeModal}
                         contentLabel="Example Modal"
                         className="modal"
@@ -104,12 +100,13 @@ class Header extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        modalIsOpen: state.modalIsOpen
+        session: state.session,
+        modal: state.modal
     }
 }
 
 let mapDispatchToProps = {
-    modalState, logoutUser, loginUser, sessionCheck
+    userAuth, modalState
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

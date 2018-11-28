@@ -3,13 +3,16 @@ const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 const controller = require('./controller');
+
 // const socket = require('socket.io');
 
 
 const app = express();
 
 const {
-    SERVER_PORT, MASSIVE_CONNECTION, SECRET
+    SERVER_PORT,
+    MASSIVE_CONNECTION,
+    SECRET
 } = process.env;
 
 massive(MASSIVE_CONNECTION).then(db => {
@@ -22,12 +25,19 @@ app.use(session({
     secret: SECRET,
     resave: false,
     saveUninitialized: false
+    // cookie: {
+    //     maxAge: 1814400000
+    // }
 }))
 
 app.post('/auth/signup', controller.signup)
 app.post('/auth/login', controller.login)
 app.get('/auth/logout', controller.logout)
 app.get('/auth/check', controller.sessionCheck)
+app.get('/api/sign-s3', controller.signURL)
+app.patch('/api/user-img', controller.updateUserImg)
+app.put('/api/user-info', controller.updateUserInfo)
+app.patch('/api/user-email', controller.updateUserEmail)
 
 app.listen(SERVER_PORT, () =>
     console.log(`Ahoy, port ${SERVER_PORT}!`))
