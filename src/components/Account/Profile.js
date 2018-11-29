@@ -76,13 +76,18 @@ class Profile extends Component {
     }
 
     async updateInfo() {
-        let res = await axios.put('/api/user-info', {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName
-        })
-            .catch(err => { alert(err.response.request.response) })
-        this.props.updateUserInfo(res.data)
+        try {
+            let res = await axios.put('/api/user-info', {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName
+            })
+            this.props.updateUserInfo(res.data)
+        }
+        catch (error) {
+            // alert(error.response.request.response)
+        }
     }
+    
 
     updateFirstName(e) {
         this.setState({ firstName: e.target.value })

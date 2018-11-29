@@ -37,7 +37,7 @@ class Header extends Component {
                 this.props.userAuth(res.data)
             }
         } catch (error) {
-            // this.props.userAuth({})
+            // this.props.userAuth(false)
         }
         // this.props.sessionState(true)
     }

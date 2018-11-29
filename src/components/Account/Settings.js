@@ -18,11 +18,15 @@ class Settings extends Component {
     }
 
     async updateEmail() {
-        let res = await axios.patch('/api/user-email', {
-            newEmail: this.state.emailInput
-        })
-            .catch(err => { alert(err.response.request.response) })
-        this.props.updateUserEmail(res.data)
+        try {
+            let res = await axios.patch('/api/user-email', {
+                newEmail: this.state.emailInput
+            })
+            this.props.updateUserEmail(res.data)
+        }
+        catch (error) {
+            // alert(err.response.request.response)
+        }
     }
 
     updateEmailInput(e) {

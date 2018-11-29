@@ -47,12 +47,10 @@ module.exports = {
         res.status(200).send({ user: {}, session: false })
     },
     sessionCheck(req, res) {
-        console.log(req.session.user)
         if (req.session.user) {
             return res.status(200).send({ user: req.session.user, session: true })
         } else {
             res.status(401).send('No active session')
-            console.log('No active session')
         }
     },
     signURL(req, res) {
@@ -92,16 +90,16 @@ module.exports = {
     },
     async updateUserImg(req, res) {
         const { url } = req.body
-        const { id } = req.session.user
+        const { userID } = req.session.user
         let db = req.app.get('db')
-        let [updateUserImg] = await db.update_user_img([url, id]);
+        let [updateUserImg] = await db.update_user_img([url, userID]);
         res.status(200).send(updateUserImg.profile_pic)
     },
     async updateUserInfo(req, res) {
         const { firstName, lastName } = req.body
-        const { id } = req.session.user
+        const { userID } = req.session.user
         let db = req.app.get('db')
-        let [updateUserInfo] = await db.update_user_info([firstName, lastName, id]);
+        let [updateUserInfo] = await db.update_user_info([firstName, lastName, userID]);
         res.status(200).send({
             firstName: updateUserInfo.first_name,
             lastName: updateUserInfo.last_name
@@ -109,9 +107,9 @@ module.exports = {
     },
     async updateUserEmail(req, res) {
         const { newEmail } = req.body
-        const { id } = req.session.user
+        const { userID } = req.session.user
         let db = req.app.get('db')
-        let [updateUserEmail] = await db.update_user_email([newEmail, id]);
+        let [updateUserEmail] = await db.update_user_email([newEmail, userID]);
         res.status(200).send(updateUserEmail.user_email)
     }
 }
