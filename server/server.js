@@ -1,4 +1,3 @@
-const path = require('path'); // Usually moved to the start of file
 require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
@@ -7,10 +6,6 @@ const controller = require('./controller');
 // const socket = require('socket.io');
 
 const app = express();
-
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
 
 const {
     SERVER_PORT,
@@ -23,6 +18,7 @@ massive(MASSIVE_CONNECTION).then(db => {
     console.log('db has docked');
 })
 
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(express.json());
 app.use(session({
     secret: SECRET,
