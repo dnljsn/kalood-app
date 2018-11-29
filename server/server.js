@@ -1,13 +1,16 @@
+const path = require('path'); // Usually moved to the start of file
 require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 const controller = require('./controller');
-
 // const socket = require('socket.io');
 
-
 const app = express();
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 const {
     SERVER_PORT,
