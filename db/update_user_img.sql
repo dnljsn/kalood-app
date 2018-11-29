@@ -1,4 +1,4 @@
 update users
-set profile_pic = $1
+set user_img = $1
 where id = $2
 returning *;

@@ -38,6 +38,7 @@ app.get('/api/sign-s3', controller.signURL)
 app.patch('/api/user-img', controller.updateUserImg)
 app.put('/api/user-info', controller.updateUserInfo)
 app.patch('/api/user-email', controller.updateUserEmail)
+app.delete('/api/user/:id', controller.deleteUser)
 
 app.listen(SERVER_PORT, () =>
     console.log(`Ahoy, port ${SERVER_PORT}!`))

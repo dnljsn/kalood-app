@@ -29,6 +29,13 @@ class Settings extends Component {
         }
     }
 
+    deleteUser(id) {
+        let promise = axios.delete(`/api/user/${id}`)
+        promise.then(res => {
+            this.props.userAuth(res.data)
+        })
+    }
+
     updateEmailInput(e) {
         this.setState({ emailInput: e.target.value })
     }
@@ -64,7 +71,7 @@ class Settings extends Component {
                         >RESET PASSWORD</button>
                         <button
                             className='button-style-delete'
-                            // onClick={() => this.login()}
+                            onClick={() => this.deleteUser(this.props.user.id)}
                             type='button'
                         >DELETE ACCOUNT</button>
                     </div>

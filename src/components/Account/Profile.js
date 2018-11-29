@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ProfilePic from '../../assets/profile-pic.JPG';
+import ProfilePic from '../../assets/PersonPlaceholder.png';
 import './Account.css';
 import axios from 'axios';
 import { v4 as randomString } from 'uuid'

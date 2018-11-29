@@ -6,7 +6,8 @@ import routes from './routes/routes';
 // import socket from 'socket.io-client';
 
 
-// const io = socket.connect("http://localhost:4000")
+
+// const io = socket.connect(process.env.SOCKET_CONNECTION)
 
 // constructor() {
 //   super()

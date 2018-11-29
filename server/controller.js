@@ -12,10 +12,10 @@ module.exports = {
         let [createdUser] = await db.create_user([email, hash]);
         req.session.user = {
             userID: createdUser.id,
-            email: createdUser.user_email,
+            email: createdUser.email,
             firstName: createdUser.first_name,
             lastName: createdUser.last_name,
-            userImg: createdUser.profile_pic
+            userImg: createdUser.user_img
         };
         res.status(200).send({ user: req.session.user, session: true })
     },
@@ -24,14 +24,14 @@ module.exports = {
         let db = req.app.get('db');
         let [foundUser] = await db.find_user([email]);
         if (foundUser) {
-            let result = bcrypt.compareSync(password, foundUser.user_hash)
+            let result = bcrypt.compareSync(password, foundUser.hash)
             if (result) {
                 req.session.user = {
                     userID: foundUser.id,
-                    email: foundUser.user_email,
+                    email: foundUser.email,
                     firstName: foundUser.first_name,
                     lastName: foundUser.last_name,
-                    userImg: foundUser.profile_pic
+                    userImg: foundUser.user_img
                 };
                 res.status(200).send({ user: req.session.user, session: true })
             } else {
@@ -93,7 +93,7 @@ module.exports = {
         const { userID } = req.session.user
         let db = req.app.get('db')
         let [updateUserImg] = await db.update_user_img([url, userID]);
-        res.status(200).send(updateUserImg.profile_pic)
+        res.status(200).send(updateUserImg.user_img)
     },
     async updateUserInfo(req, res) {
         const { firstName, lastName } = req.body
@@ -110,6 +110,12 @@ module.exports = {
         const { userID } = req.session.user
         let db = req.app.get('db')
         let [updateUserEmail] = await db.update_user_email([newEmail, userID]);
-        res.status(200).send(updateUserEmail.user_email)
+        res.status(200).send(updateUserEmail.email)
+    },
+    async deleteUser(req, res) {
+        const { id } = req.params.id
+        let db = req.app.get('db')
+        let [deleteUser] = await db.delete_user([id]);
+        res.status(200).send({ user: {}, session: false })
     }
 }
