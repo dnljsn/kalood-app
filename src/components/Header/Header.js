@@ -3,14 +3,14 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-// import { logoutUser } from '../../redux/reducer';
 import { modalState } from '../../redux/reducer';
 import { userAuth } from '../../redux/reducer';
-// import { sessionState } from '../../redux/reducer'
 import Logo from '../../assets/kalood-logo.svg';
 import './Header.css';
 import Login from './Login';
 import Signup from './Signup';
+import StartVote from './StartVote/StartVote';
+// import UploadImage from './StartVote/UploadImage';
 
 Modal.setAppElement('#root')
 
@@ -26,6 +26,7 @@ class Header extends Component {
         };
 
         this.openModal = this.openModal.bind(this);
+        this.changeModal = this.changeModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.logout = this.logout.bind(this);
     }
@@ -37,9 +38,7 @@ class Header extends Component {
                 this.props.userAuth(res.data)
             }
         } catch (error) {
-            // this.props.userAuth(false)
         }
-        // this.props.sessionState(true)
     }
 
     openModal(component) {
@@ -49,8 +48,17 @@ class Header extends Component {
         });
     }
 
+    changeModal(component) {
+        this.setState({
+            modalComponent: component
+        })
+    }
+
     closeModal() {
         this.props.modalState(false)
+        this.setState({
+            modalComponent: ''
+        })
     }
 
     async logout() {
@@ -60,24 +68,29 @@ class Header extends Component {
 
 
     render() {
-        let checkButton = this.state.modalComponent === 'Login' ? <Login /> : <Signup />
+        let checkButton = this.state.modalComponent
         return (
             <div>
                 <div className="header">
                     <Link to="/">
                         <img className='logo' src={Logo} alt="" />
                     </Link>
+                    <button className='product-button' onClick={() => this.openModal(
+                        <StartVote
+                            changeModal={this.changeModal}
+                        />
+                    )}>START A VOTE</button>
                     {this.props.session ? (
                         <button className='header-button' onClick={this.logout}>LOGOUT</button>
                     ) : (
-                            <button className='header-button' onClick={() => this.openModal('Login')}>LOG IN</button>
+                            <button className='header-button' onClick={() => this.openModal(<Login />)}>LOG IN</button>
                         )}
                     {this.props.session ? (
                         <Link to="/account">
                             <button className='header-button'>ACCOUNT</button>
                         </Link>
                     ) : (
-                            <button className='header-button' onClick={() => this.openModal('Signup')}>SIGN UP</button>
+                            <button className='header-button' onClick={() => this.openModal(<Signup />)}>SIGN UP</button>
                         )}
                     <Modal
                         isOpen={this.props.modal}

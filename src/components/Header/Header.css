@@ -17,10 +17,30 @@
     font-weight: 600;
     font-size: 14px;
     float: right;
-    margin: 0px 20px;
+    margin: 0px 10px;
     height: 100%;
     background-color: transparent;
     border: 0px;
+}
+
+.product-button{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    float: right;
+    margin: 8px 20px;
+    height: 70%;
+    width: 150px;
+    background-color: transparent;
+    border: 2px;
+    border-style: solid;
+    border-radius: 6px;
+}
+
+.product-button:hover {
+    background-color: #0088ff;
+    border: 2px;
+    color: white; 
 }
 
 .header-button:hover {
@@ -149,6 +169,106 @@
 }
 
 .signup-button:hover {
+    background-color: #0088ff;
+    border: 2px;
+    color: white; 
+}
+
+.startvote-h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 20px 0px auto;
+}
+
+.startVote-h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 10px 50px 0px 50px;
+}
+
+.startVote-h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    margin: 5px 50px 10px 50px;
+}
+
+.profile-h {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropzone-h {
+    background-size: cover;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 30px 5px #000000; */
+    margin: 30px;
+}
+
+.dropzone-overlay-h {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000070;
+    color: white;
+    opacity: .0;
+    z-index: 70;
+    border-radius: 3%;
+}
+
+.dropzone-overlay-h:hover {
+    opacity: 1;
+}
+
+.submit-button {
+    width: 390px;
+    height: 60px;
+    margin: 20px auto;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.submit-button:hover {
+    background-color: #0088ff;
+    border: 2px;
+    color: white; 
+}
+
+.submit-button-back {
+    width: 390px;
+    height: 60px;
+    margin: 0px auto;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.submit-button-back:hover {
     background-color: #0088ff;
     border: 2px;
     color: white; 

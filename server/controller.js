@@ -117,5 +117,34 @@ module.exports = {
         let db = req.app.get('db')
         let [deleteUser] = await db.delete_user([id]);
         res.status(200).send({ user: {}, session: false })
+    },
+    async addProduct(req, res) {
+        console.log('api working')
+        const { productName, companyName, companyUrl, productImg, user } = req.body
+        let db = req.app.get('db')
+        let foundProduct = await db.find_product([productName]);
+        
+        if (foundProduct[0]) return res.status(200).send({messsage: 'This product has already been added'})
+        // let [createdProduct] =
+            await db.create_product([productName, companyName, companyUrl, productImg, user])
+        // let newProduct = {
+        //     productName: createdProduct.product_name,
+        //     companyName: createdProduct.company_name,
+        //     companyUrl: createdProduct.company_website,
+        //     productImg: createdProduct.product_img,
+        //     createdBy: createdProduct.created_by
+        // }
+        res.sendStatus(200)
+    },
+    async getProducts(req, res) {
+        let db = req.app.get('db')
+        let allProducts = await db.get_products();
+        // console.log(allProducts)
+        res.status(200).send(allProducts)
+    },
+    async voteUp(req, res) {
+        let db = req.app.get('db')
+        let votes = await db.vote_up(req.body.id)
+        res.status(200).send(votes)
     }
 }
