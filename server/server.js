@@ -40,7 +40,7 @@ app.patch('/api/user-email', controller.updateUserEmail)
 app.delete('/api/user/:id', controller.deleteUser)
 app.post('/api/add-product', controller.addProduct)
 app.get('/api/products', controller.getProducts)
-app.post('api/vote-up', controller.voteUp)
+app.post('/api/vote-up', controller.voteUp)
 
 app.listen(SERVER_PORT, () =>
     console.log(`Ahoy, port ${SERVER_PORT}!`))

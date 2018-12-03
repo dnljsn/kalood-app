@@ -119,7 +119,6 @@ module.exports = {
         res.status(200).send({ user: {}, session: false })
     },
     async addProduct(req, res) {
-        console.log('api working')
         const { productName, companyName, companyUrl, productImg, user } = req.body
         let db = req.app.get('db')
         let foundProduct = await db.find_product([productName]);
@@ -143,8 +142,9 @@ module.exports = {
         res.status(200).send(allProducts)
     },
     async voteUp(req, res) {
+        console.log('api working')
         let db = req.app.get('db')
-        let votes = await db.vote_up(req.body.id)
-        res.status(200).send(votes)
+        let allProducts = await db.vote_up(req.body.id)
+        res.status(200).send(allProducts)
     }
 }

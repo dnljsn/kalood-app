@@ -26,11 +26,19 @@ class App extends Component {
 
     // handleClick() {
     //   io.emit('send-message', { message: this.state.message });
+    this.updateVotes = this.updateVotes.bind(this)
   }
 
   componentDidMount() {
     axios.get('/api/products').then(res => {
       this.setState({ products: res.data })
+      // console.log(this.state.products)
+    })
+  }
+
+  updateVotes(products) {
+    this.setState({
+      products
     })
   }
 
@@ -39,9 +47,9 @@ class App extends Component {
       return (
         <ProductCards
           products={element}
-        />
-      )
-    })
+          updateVotes={this.updateVotes}
+          />
+        )})
     return (
       <div className="App">
         <Header />

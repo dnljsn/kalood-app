@@ -36,7 +36,7 @@
   position: relative;
   box-shadow: 0px 0px 25px grey;
   width: 290px;
-  height: 400px;
+  height: 375px;
   margin: 0px 15px 30px;
   border-radius: 5px;
 
@@ -44,7 +44,6 @@
 
 .card-text{
   margin: 0px auto;
-  
 }
 
 main {
@@ -60,4 +59,43 @@ main {
 .product-image {
   border-radius: 5px 5px 0 0;
   overflow: hidden;
+}
+
+.product-name {
+  text-align: left;
+  margin: 0px 0px 0px 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.company-name {
+  text-align: left;
+  margin: 0px 0px 0px 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.vote-button{
+  float: right;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  float: right;
+  margin: 7px;
+  height: 70%;
+  width: 80px;
+  background-color: transparent;
+  border: 1px;
+  border-style: solid;
+  border-radius: 6px;
+}
+
+.vote-button:hover {
+  color: white;
+  background-color: #0088ff;
+  border: 1px;
+  border-style: none;
+  border-radius: 6px;
 }
